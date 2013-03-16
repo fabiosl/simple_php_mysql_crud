@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -9,15 +10,9 @@
 <body>
   <table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->
     <?php
-    $con=mysqli_connect("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
-
-    if (mysqli_connect_errno($con)){
-      echo "Failed to connect to MySQL: " . mysqli_connect_error();
-    } 
-    
     ?>
     <!-- Table Header -->
-    <thead>
+    <thead>      
       <tr>
         <th>First Name</th>
         <th>Last Name</th>
@@ -31,33 +26,28 @@
 
     <!-- Table Body -->
     <tbody>
+      <?php
+  
+      $connection=mysqli_connect("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
+      if (mysqli_connect_errno($connection)){
+        echo "Failed to connect to MySQL: " . mysqli_connect_error();
+      } 
 
-      <tr>
-        <td>Fabio</td>
-        <td>Leal</td>
-        <td>Brazil</td>
-        <td>Joao Pessoa</td>
-        <td>Av. Sape, 1393, Ap 1901</td>
-        <td>hey@ho.lets.go</td>
-      </tr><!-- Table Row -->
+      $users = mysqli_query($connection, "SELECT * FROM user");
 
-      <tr class="even">
-        <td>Milena</td>
-        <td>Berry</td>
-        <td>USA</td>
-        <td>New York</td>
-        <td>350 Fifth Avenue, 34th floor.</td>
-        <td>hey@ho.lets.go</td>
-      </tr><!-- Darker Table Row -->
+      while($row = mysqli_fetch_array($users)){
+        echo "<tr class='even'>";
+        echo "<td>" . $row['first_name'] ."</td>";
+        echo "<td>" . $row['last_name'] ."</td>";
+        echo "<td>" . $row['country'] ."</td>";
+        echo "<td>" . $row['city'] ."</td>";
+        echo "<td>" . $row['address'] ."</td>";
+        echo "<td>" . $row['email'] ."</td>";
+        echo "</tr><!-- Table Row -->";
+      }
 
-      <tr class="even">
-        <td><a href="#yep-iit-doesnt-exist">Hyperlink</a></td>
-        <td>80%</td>
-        <td><a href="#inexistent-id">Another</a></td>
-        <td><a href="#inexistent-id">Another</a></td>
-        <td><a href="#inexistent-id">Another</a></td>
-        <td><a href="#inexistent-id">Another</a></td>
-      </tr>
+      mysqli_close($connection);
+      ?>      
 
     </tbody>
     <!-- Table Body -->
