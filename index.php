@@ -3,7 +3,7 @@
 
 <head>
   <link rel="stylesheet" href="css/main.css" type="text/css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </head>
 
@@ -33,7 +33,7 @@
         echo "Failed to connect to MySQL: " . mysqli_connect_error();
       } 
 
-      $users = mysqli_query($connection, "SELECT * FROM user");
+      $users = mysqli_query($connection, "SELECT * FROM Users");
 
       while($row = mysqli_fetch_array($users)){
         echo "<tr class='even'>";
@@ -48,10 +48,22 @@
 
       mysqli_close($connection);
       ?>      
+      <form action="insert.php" method="POST">
+      <td><input type="text" name="first_name"></td>
+      <td><input type="text" name="last_name"></td>
+      <td><input type="text" name="country"></td>
+      <td><input type="text" name="city"></td>
+      <td><input type="text" name="address"></td>
+      <td><input type="text" name="email"><input type="submit"></td>
+      
+      </form>
+
 
     </tbody>
     <!-- Table Body -->
-
   </table>
+
+
+
 </body>
 </html>
