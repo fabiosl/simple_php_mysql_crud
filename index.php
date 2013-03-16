@@ -48,21 +48,21 @@
 
       mysqli_close($connection);
       ?>      
-      <form action="insert.php" method="POST">
-      <td><input type="text" name="first_name"></td>
-      <td><input type="text" name="last_name"></td>
-      <td><input type="text" name="country"></td>
-      <td><input type="text" name="city"></td>
-      <td><input type="text" name="address"></td>
-      <td><input type="text" name="email"><input type="submit"></td>
-      
-      </form>
-
+     
 
     </tbody>
+
     <!-- Table Body -->
   </table>
 
+  <form id="add_user_form" method="POST">
+    <td><input type="text" name="first_name"></td>
+    <td><input type="text" name="last_name"></td>
+    <td><input type="text" name="country"></td>
+    <td><input type="text" name="city"></td>
+    <td><input type="text" name="address"></td>
+    <td><input type="text" name="email"><input type="submit"></td>
+  </form>
 
 
 </body>
