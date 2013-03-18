@@ -16,7 +16,7 @@
   </div>
 
   <!-- Order By form-->
-  <div id="order-by-form">
+  <div>
   <?php
   $field_array = array("first_name","last_name", "country", "city", "address", "email");
   $direction_array = array("asc","desc");

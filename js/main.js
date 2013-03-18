@@ -63,12 +63,16 @@ function editRow(rowNumber){
 }
 
 function deleteRow(rowNumber){
-  $.ajax({
-    type: "POST",
-    url: 'delete.php',
-    data: {'id':rowNumber},
-    success: success
-  });
+  if(confirm("Are you sure that you want to delete this user?")){
+    $.ajax({
+      type: "POST",
+      url: 'delete.php',
+      data: {'id':rowNumber},
+      success: function(){
+        $("tr[row_id='"+ rowNumber+"']").remove();
+      }
+    });
+  }
 }
 
 function validateValues(values){
