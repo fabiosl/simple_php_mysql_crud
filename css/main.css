@@ -95,3 +95,32 @@ table tr:hover td {
   background: -webkit-gradient(linear, left top, left bottom, from(#f2f2f2), to(#f0f0f0));
   background: -moz-linear-gradient(top,  #f2f2f2,  #f0f0f0);  
 }
+
+#loading-div-background {
+    opacity: 0.8; 
+    display: none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 100;
+    background:black;
+}
+
+#bg-loading-image{
+  border-radius: 15px; 
+  margin-top: 260px;
+  width:154px;
+  height:154px; 
+  margin-left:auto; 
+  margin-right:auto;
+  background-image: url('../img/loading.gif');
+}
+#loading-text {
+  color: #ffffff;
+  height: 16px;
+  text-align: center;
+  vertical-align: middle;
+  padding-top: 65px;
+}
