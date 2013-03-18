@@ -8,11 +8,20 @@ function getValuesAsObject($fields){
 
 function validateEmail(email) {
     filter = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    return filter.test(email);
+    emailOk = filter.test(email);
+    if (!emailOk) {
+      alert("Invalid email!");
+    }
+    return emailOk;
 }
 
 function success(){
   alert("Success! Reloading page...");
+  window.location.reload();
+}
+
+function error(){
+  alert("Error! Reloading page...");
   window.location.reload();
 }
 
@@ -36,12 +45,13 @@ function saveRow(rowNumber){
       type: "POST",
       url: 'update.php',
       data: values,
-      success: function(){
+      success: (function(){
         alert ("Updated Successfully!");
         removeTextAreasFromRow(rowNumber);
         $('#save_button_'+rowNumber).hide(); //hide save button
         $('#edit_button_'+rowNumber).show(); //show edit button
-      }
+      }),
+      error: error
     });
   }
 
@@ -51,7 +61,7 @@ function addTextAreasOnRow(rowNumber){
   $editable_fields = $("tr[row_id="+ rowNumber+ "] .row_field");
   $editable_fields.each(function() {
     var content = $(this).html();
-    var newHTML = "<input name='"+ $(this).attr('name') +"' value='"+ content+"'></input>"
+    var newHTML = "<input name=\""+ $(this).attr('name') +"\" value=\""+ content.replace('"','') +"\"></input>"
     $(this).html(newHTML);
   });
 }
@@ -76,12 +86,7 @@ function deleteRow(rowNumber){
 }
 
 function validateValues(values){
-  if (validateEmail(values.email)){
-    return true;
-  }else{
-    alert ("Invalid email!");
-    return false;
-  }
+  return validateEmail(values.email)
 }
 
 $(document).ready(function () {
@@ -93,13 +98,12 @@ $(document).ready(function () {
       type: "POST",
       url: 'insert.php',
       data: values,
-      success: success
+      success: success,
+      error: error
     }); 
     }
     return false;
   });
-
-
 
 $(document)
   .ajaxStart(function() {

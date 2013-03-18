@@ -12,7 +12,7 @@ function getTableRowControlField($row_id){
   return $result;
 }
 
-function allParamsAreSet(){ //variable number of arguments
+function allParamsAreSetted(){ //variable number of arguments
   $numargs = func_num_args();
   $arg_list = func_get_args();
   for ($i = 0; $i < $numargs; $i++) {
@@ -26,7 +26,29 @@ function allParamsAreSet(){ //variable number of arguments
 
 function validateOrderBy($order_by,$direction){
   global $field_array, $direction_array;
-  return allParamsAreSet($order_by, $direction) and in_array($order_by, $field_array) and in_array($direction, $direction_array);
+  return allParamsAreSetted($order_by, $direction) and in_array($order_by, $field_array) and in_array($direction, $direction_array);
 }
+
+function hasHTMLTags($variable){
+  return strip_tags($variable) != $variable;
+}
+
+
+function filterPostParams() {
+  //Checks if any parameter contains HTML tags.
+  foreach ($_POST as $key => $value){
+    if(hasHTMLTags($value)){
+      return false;
+    }  
+  }
+  
+  //Validates email field
+  if (!filter_var($_POST[email], FILTER_VALIDATE_EMAIL)){
+    return false;
+  }
+  
+  return true;
+}
+
 
 ?>

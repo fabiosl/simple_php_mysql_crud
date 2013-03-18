@@ -73,12 +73,12 @@
               while ($stmt->fetch()) {
                 echo "<tr row_id='{$id}' class='even'>";
                 echo "<td class='row_field' name='id' style='display:none'>{$id}</td>";
-                echo "<td class='row_field' name='first_name'>{$first_name}</td>";
-                echo "<td class='row_field' name='last_name'>{$last_name}</td>";
-                echo "<td class='row_field' name='country'>{$country}</td>";
-                echo "<td class='row_field' name='city'>{$city}</td>";
-                echo "<td class='row_field' name='address'>{$address}</td>";
-                echo "<td class='row_field' name='email'>{$email}</td>";
+                echo "<td class='row_field' name='first_name'>" . htmlspecialchars($first_name) . "</td>";
+                echo "<td class='row_field' name='last_name'>" . htmlspecialchars($last_name) . "</td>";
+                echo "<td class='row_field' name='country'>" . htmlspecialchars($country) . "</td>";
+                echo "<td class='row_field' name='city'>" . htmlspecialchars($city) . "</td>";
+                echo "<td class='row_field' name='address'>" . htmlspecialchars($address) . "</td>";
+                echo "<td class='row_field' name='email'>" . htmlspecialchars($email) . "</td>";
                 echo "<td>". getTableRowControlField($id) ."</td>";
                 echo "</tr><!-- Table Row -->";
               }

@@ -1,7 +1,6 @@
 <?php
-
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+include 'util.php';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' and filterPostParams()) {
   $mysqli = new mysqli("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
 
   /* check connection */
@@ -10,10 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       exit();
   }
 
-  // $name = mysql_real_escape_string($name);
-
-  if ($stmt = $mysqli->prepare("UPDATE Users SET first_name=?, last_name=?, country=?, city=?, address=?, email=? WHERE id=75")) {
-    $stmt->bind_param('ssssssi', $_POST[first_name], $_POST[last_name], $_POST[country], $_POST[city], $_POST[address], $_POST[email], $_POST[id]);
+  if ($stmt = $mysqli->prepare("UPDATE Users SET first_name=?, last_name=?, country=?, city=?, address=?, email=? WHERE id=?")) {
+    $stmt->bind_param('ssssssi', strip_tags($_POST[first_name]), strip_tags($_POST[last_name]), strip_tags($_POST[country]), strip_tags($_POST[city]), strip_tags($_POST[address]), strip_tags($_POST[email]), strip_tags($_POST[id]));
     $stmt->execute();
     echo "Updated 1 row\n";
     $stmt->close();
@@ -21,6 +18,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     printf("Prepared Statement Error: %s\n", $mysqli->error);
   }
   
+} else {
+    header('HTTP/1.0 403 Forbidden');
+    echo "<h1>403 Not Found</h1>";
+    echo "The page that you have requested could not be found.";
+    exit();
 }
 
 ?>
