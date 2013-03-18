@@ -1,7 +1,7 @@
 <?php
 include 'util.php';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' and filterPostParams()) {
-  $mysqli = new mysqli("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
+  $mysqli = new mysqli("127.0.0.1","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
 
   /* check connection */
   if (mysqli_connect_errno()) {

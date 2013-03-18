@@ -1,7 +1,7 @@
 function getValuesAsObject($fields){
   var values = {};
   $fields.each(function() {
-        values[this.name] = $(this).val();
+        values[this.name] = $(this).val().replace(/\'/g,'').replace(/\"/g,'');
   });
   return values;
 }
@@ -34,7 +34,7 @@ function getValuesFromRow(rowNumber){
 function removeTextAreasFromRow(rowNumber){
   $editable_fields = $("tr[row_id="+ rowNumber+ "] .row_field");
   $editable_fields.each(function() {    
-    $(this).html($(this).children(0).val());
+    $(this).html($(this).children(0).val().replace(/\'/g,'').replace(/\"/g,''));
   });
 }
 
@@ -61,7 +61,7 @@ function addTextAreasOnRow(rowNumber){
   $editable_fields = $("tr[row_id="+ rowNumber+ "] .row_field");
   $editable_fields.each(function() {
     var content = $(this).html();
-    var newHTML = "<input name=\""+ $(this).attr('name') +"\" value=\""+ content.replace('"','') +"\"></input>"
+    var newHTML = "<input name=\""+ $(this).attr('name') +"\" value=\""+ content+"\" maxlength='45'></input>"
     $(this).html(newHTML);
   });
 }

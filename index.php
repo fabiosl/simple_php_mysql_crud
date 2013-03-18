@@ -57,7 +57,7 @@
 
         // Table Body
         echo "<tbody>";
-            $mysqli = new mysqli("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
+            $mysqli = new mysqli("127.0.0.1","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
 
             /* check connection */
             if (mysqli_connect_errno()) {
@@ -93,12 +93,12 @@
     ?>     
 
     <form id="add_user_form" method="POST">
-      <input type="text" placeholder="First name" name="first_name">
-      <input type="text" placeholder= "Last name" name="last_name">
-      <input type="text" placeholder= "Country" name="country">
-      <input type="text" placeholder= "City" name="city">
-      <input type="text" placeholder= "Address" name="address">
-      <input type="text" placeholder= "Email" name="email">
+      <input type="text" placeholder="First name" name="first_name" maxlength="45">
+      <input type="text" placeholder= "Last name" name="last_name" maxlength="45">
+      <input type="text" placeholder= "Country" name="country" maxlength="45">
+      <input type="text" placeholder= "City" name="city" maxlength="45">
+      <input type="text" placeholder= "Address" name="address" maxlength="45">
+      <input type="text" placeholder= "Email" name="email" maxlength="45">
       <input type="submit">
     </form>
   </body>
