@@ -21,6 +21,7 @@
       include 'util.php';
       
       echo "<div>";
+        echo "<span>Order By: </span>";
         echo "<form action='index.php' id='order_by_form' method='GET'>";  
           echo  "<select name='order_by'>";
           foreach ($field_array as &$field) {
@@ -57,14 +58,6 @@
 
         // Table Body
         echo "<tbody>";
-            $mysqli = new mysqli("127.0.0.1","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
-
-            /* check connection */
-            if (mysqli_connect_errno()) {
-                printf("Connect failed: %s\n", mysqli_connect_error());
-                exit();
-            }
-
             $orderedQuery = validateOrderBy($_GET["order_by"], $_GET["direction"]);
             $sql = ($orderedQuery ? "SELECT * FROM Users ORDER BY {$_GET['order_by']} {$_GET['direction']}" : "SELECT * FROM Users ");
             if ($stmt = $mysqli->prepare($sql)) {

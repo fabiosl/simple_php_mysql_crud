@@ -1,6 +1,13 @@
 <?php
 $field_array = array("first_name","last_name", "country", "city", "address", "email");
 $direction_array = array("asc","desc");
+$mysqli = new mysqli("127.0.0.1","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
+
+/* check connection */
+if (mysqli_connect_errno()) {
+    printf("Connect failed: %s\n", mysqli_connect_error());
+    exit();
+}
 
 function getTableRowControlField($row_id){
   $save_button_id = "save_button_" . $row_id;
@@ -50,5 +57,11 @@ function filterPostParams() {
   return true;
 }
 
+function redirectTo403Page(){
+  header('HTTP/1.0 403 Forbidden');
+  echo "<h1>403 Not Found</h1>";
+  echo "The page that you have requested could not be found.";
+  exit();
+}
 
 ?>
