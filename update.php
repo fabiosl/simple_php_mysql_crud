@@ -1,17 +1,26 @@
 <?php
-$connection=mysqli_connect("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $mysqli = new mysqli("localhost:3306","root","!@#4dm!nCh4nge","php_mysql_simple_crud_schema");
+
+  /* check connection */
+  if (mysqli_connect_errno()) {
+      printf("Connect failed: %s\n", mysqli_connect_error());
+      exit();
   }
 
-$sql="UPDATE Users SET first_name='$_POST[first_name]', last_name='$_POST[last_name]', country='$_POST[country]', city='$_POST[city]', address='$_POST[address]', email='$_POST[email]' WHERE id='$_POST[id]'";
+  // $name = mysql_real_escape_string($name);
 
-if (!mysqli_query($connection,$sql)){
-  die('Error: ' . mysqli_error());
+  if ($stmt = $mysqli->prepare("UPDATE Users SET first_name=?, last_name=?, country=?, city=?, address=?, email=? WHERE id=75")) {
+    $stmt->bind_param('ssssssi', $_POST[first_name], $_POST[last_name], $_POST[country], $_POST[city], $_POST[address], $_POST[email], $_POST[id]);
+    $stmt->execute();
+    echo "Updated 1 row\n";
+    $stmt->close();
+  } else {
+    printf("Prepared Statement Error: %s\n", $mysqli->error);
+  }
+  
 }
 
-echo "1 record updated";
-mysqli_close($connection);
 ?>
