@@ -19,39 +19,23 @@
     <!-- Order By form-->
     <?php
       include 'util.php';
-      
-      echo "<div>";
-        echo "<span>Order By: </span>";
-        echo "<form action='index.php' id='order_by_form' method='GET'>";  
-          echo  "<select name='order_by'>";
-          foreach ($field_array as &$field) {
-            $selected = ($field == $_GET["order_by"] ? "selected='selected'" : "");
-            echo "<option value='{$field}' {$selected}>" . ucwords(str_replace("_", " ", $field)) . "</option>";
-          }
-          echo "</select>";
-        
-          echo "<select name='direction'>";
-          foreach ($direction_array as &$field) {
-            $selected = ($field == $_GET["direction"] ? "selected='selected'" : "");
-            echo "<option value='{$field}' {$selected}  >{$field}</option>";
-          }
-          echo "</select>";
-          
-          echo "<input type='submit'>";
-        echo "</form>";
-      echo "</div>";
-
       echo "<table cellspacing='0'> <!-- cellspacing='0' is important, must stay -->";
         
         // Table Header
         echo "<thead>";
           echo "<tr>";
-            echo "<th>First Name</th>";
-            echo "<th>Last Name</th>";
-            echo "<th>Country</th>";
-            echo "<th>City</th>";
-            echo "<th>Address</th>";
-            echo "<th>Email</th>";
+          foreach ($field_array as &$field) {
+            $selected = ($field == $_GET["order_by"]);
+            
+            if ($selected){
+              $image = getArrowImage($_GET["direction"]);
+              $imageTag = "<img style='margin-left:5px;' src='{$image}'>";
+              echo "<th><a href='?&order_by={$field}&direction=" . getInverse($_GET["direction"]) . "'>". ucwords(str_replace("_", " ", $field)) . "</a>{$imageTag}</th>";
+            }
+            else {
+              echo "<th><a href='?&order_by={$field}&direction=asc'>". ucwords(str_replace("_", " ", $field)) . "</a></th>";
+            }
+          }
           echo "</tr>";
         echo "</thead>";
         
@@ -94,5 +78,6 @@
       <input type="text" placeholder= "Email" name="email" maxlength="45">
       <input type="submit">
     </form>
+
   </body>
 </html>

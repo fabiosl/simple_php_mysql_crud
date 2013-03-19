@@ -64,4 +64,21 @@ function redirectTo403Page(){
   exit();
 }
 
+function getArrowImage($orientation){
+  if ($orientation == "asc"){
+    return "img/up.png";
+  }else if ($orientation == "desc"){
+    return "img/down.png";
+  }
+}
+
+function getInverse($orientation){
+  if ($orientation == "asc"){
+    return "desc";
+  }else if ($orientation == "desc"){
+    return "asc";
+  }
+}
+
+
 ?>
