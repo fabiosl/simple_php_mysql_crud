@@ -50,6 +50,7 @@ function saveRow(rowNumber){
         removeTextAreasFromRow(rowNumber);
         $('#save_button_'+rowNumber).hide(); //hide save button
         $('#edit_button_'+rowNumber).show(); //show edit button
+        window.location.reload();
       }),
       error: error
     });
